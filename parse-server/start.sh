@@ -10,6 +10,7 @@ mongodb-runner start
 
 parse-server --appId YOUR_APP_ID \
 --masterKey YOUR_MASTER_KEY \
+--cloud cloud/main.js \
 --databaseURI mongodb://localhost/dev & 
 
 parse-dashboard --dev --appId YOUR_APP_ID \
