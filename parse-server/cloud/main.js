@@ -1,6 +1,4 @@
-Parse.Cloud.define('hello', function(request, response) {
-    
-    var user = Parse.User.current();
 
-    response.success("messages: hello world");
-});
+Parse.Cloud.define('hello', function(req, res) {	
+    res.success('Hello World');	
+  });
