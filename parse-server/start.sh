@@ -14,11 +14,10 @@ parse-server --appId YOUR_APP_ID \
 
 parse-dashboard --dev --appId YOUR_APP_ID \
 --masterKey YOUR_MASTER_KEY \
---serverURL "http://95.217.18.84/parse" \
+--serverURL "http://95.217.18.84:1337/parse" \
 --appName EfaniGas &
 
 mongorestore --drop -d dev db/dev/ 
 
 
-# docker run -d -p 4040:4040 parseplatform/parse-dashboard --dev --appId YOUR_APP_ID --masterKey YOUR_MASTER_KEY --serverURL http://95.217.18.84:1337/parse
 
