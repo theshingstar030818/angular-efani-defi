@@ -1,0 +1,58 @@
+
+<mat-grid-list cols="4" rowHeight="1:1">
+    <mat-grid-tile>
+        <mat-card>
+            <mat-icon>slow_motion_video</mat-icon> Safe Low
+            <h4>{{gas.safeLow/10}} gwei</h4>
+            <h5>{{getWaitTimeString(gas.safeLowWait)}}</h5>
+        </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <mat-card>
+            <mat-icon>more_time</mat-icon> Average
+            <h4>{{gas.average/10}} gwei</h4>
+            <h5>{{getWaitTimeString(gas.avgWait)}}</h5>
+        </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <mat-card>
+            <mat-icon>speed</mat-icon> Fast
+            <h4>{{gas.fast/10}} gwei</h4>
+            <h5>{{getWaitTimeString(gas.fastWait)}}</h5>
+        </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <mat-card>
+            <mat-icon>speed</mat-icon> Fastest
+            <h4>{{gas.fastest/10}} gwei</h4>
+            <h5>{{getWaitTimeString(gas.fastestWait)}}</h5>
+        </mat-card>
+    </mat-grid-tile>
+    <mat-grid-list cols="1" >
+        <mat-grid-tile>
+            <mat-card>
+                <form class="form" [formGroup]="subscriberForm" (ngSubmit)="saveSubscriber()">
+                    <mat-form-field class="full-width">
+                        <mat-label>Enter Gas Price (gwei)</mat-label>
+                        <input matInput type="number" formControlName="gasPrice">
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Select Speed</mat-label>
+                        <select matInput matNativeControl formControlName="speed">
+                            <option value="safeLow">Safe Low</option>
+                            <option value="average" selected>Average</option>
+                            <option value="fast">Fast</option>
+                            <option value="fastest">Fastest</option>
+                        </select>
+                    </mat-form-field>
+                    <mat-form-field class="full-width">
+                        <mat-label>Enter Phone Number (Get notified when gas is at/below {{subscriberForm.value.gasPrice}} gwei)</mat-label>
+                        <input matInput type="tel" formControlName="phoneNumber">
+                    </mat-form-field>
+                    <button mat-raised-button type="submit" [disabled]="!subscriberForm.valid">Subscribe</button>
+                </form>
+            </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+</mat-grid-list>
+
