@@ -2,11 +2,14 @@
 
 docker kill $(docker ps -q) && docker rm $(docker ps -a -q)
 
-docker run --name my-mongo -d mongo
+fuser -k 27017/tcp
+fuser -k 1337/tcp
+fuser -k 4040/tcp
 
-docker run --name my-parse-server --link my-mongo:mongo -d parse-server \
---appId YOUR_APP_ID \
---masterKey YOUR_MASTER_KEY \
---databaseURI mongodb://mongo/dev
+mongodb-runner start
+parse-server --appId YOUR_APP_ID --masterKey YOUR_MASTER_KEY --databaseURI mongodb://localhost/dev & 
+mongorestore --drop -d dev db/dev/ 
+
 
 # docker run -d -p 4040:4040 parseplatform/parse-dashboard --dev --appId YOUR_APP_ID --masterKey YOUR_MASTER_KEY --serverURL http://95.217.18.84:1337/parse
+
