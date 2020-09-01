@@ -3,7 +3,7 @@ vm: true
 
 env_variables:
   # --REQUIRED--
-  DATABASE_URI: mongodb://localhost:27017/dev
+  DATABASE_URI: mongodb://95.217.18.84:27017/dev
   APP_ID: <your-app-id>
   MASTER_KEY: <your-master-key>
   # --OPTIONAL--
