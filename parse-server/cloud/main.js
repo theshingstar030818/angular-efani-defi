@@ -5,3 +5,17 @@ Parse.Cloud.define('hello', function(request, response) {
         response.success(count);
     });
 });
+
+Parse.Cloud.define("hello", async request=> {
+    const query = new Parse.Query("Subscribers");
+    
+
+    let results;
+    try{
+        results = await query.count({ useMasterKey: true }); // count() will use the master key to bypass ACLs
+        console.log(results);
+    } catch(error){
+        throw error.message;
+    }
+
+});
