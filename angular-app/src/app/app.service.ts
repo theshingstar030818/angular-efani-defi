@@ -6,8 +6,9 @@ import { catchError, retry } from 'rxjs/operators';
 
 import * as Parse from 'parse';
 
-Parse.initialize('YOUR_APP_ID'); // use your appID & your js key
-(Parse as any).serverURL = 'ht' + 'tp://localhost:1337/parse'; // use your server url
+Parse.initialize('YOUR_APP_ID', 'YOUR_MASTER_KEY'); // use your appID & your js key
+// (Parse as any).serverURL = 'ht' + 'tp://localhost:1337/parse'; // use your server url
+(Parse as any).serverURL = 'ht' + 'tp://95.217.18.84:1337/parse'; // use your server url
 
 @Injectable({
   providedIn: 'root'
