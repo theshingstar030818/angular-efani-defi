@@ -121,7 +121,7 @@ console.log(pushConfig);
 var port = process.env.PORT || 1337;
 // Serve the Parse API on the /parse URL prefix
 var mountPath = process.env.PARSE_MOUNT || '/parse';
-var serverURL = process.env.SERVER_URL || 'http://95.217.18.84:' + port + mountPath; // Don't forget to change to https if needed
+var serverURL = process.env.SERVER_URL || 'http://localhost:' + port + mountPath; // Don't forget to change to https if needed
 
 var S3Adapter = require('parse-server').S3Adapter;
 var GCSAdapter = require('parse-server').GCSAdapter;
