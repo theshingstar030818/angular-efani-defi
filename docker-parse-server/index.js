@@ -242,7 +242,7 @@ for (var env in process.env) {
 }
 
 var api = new ParseServer({
-    databaseURI: databaseUri || 'mongodb://95.217.18.84:27017/dev',
+    databaseURI: databaseUri || 'mongodb://localhost:27017/dev',
     databaseOptions: databaseOptions,
     cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
 
