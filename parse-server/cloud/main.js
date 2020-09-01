@@ -1,4 +1,10 @@
-
-Parse.Cloud.define('hello', function(req, res) {	
-    res.success('Hello World');	
+Parse.Cloud.define('hello', function(request, response) {
+    var user = Parse.User.current();
+  
+    var query = new Parse.Query('Subscribers');
+    query.equalTo('gasPrice', 700);
+    query.find()
+      .then(function(messages) {
+        response.success(messages);
+      });
   });
