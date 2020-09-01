@@ -4,4 +4,4 @@ curl -X POST \
 -H "X-Parse-Application-Id: myAppId" \
 -H "Content-Type: application/json" \
 -d '{}' \
-http://localhost:1337/parse/functions/hello
+http://95.217.18.84:1337/parse/functions/hello
