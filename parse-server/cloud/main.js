@@ -14,9 +14,9 @@ function getRandomInt() {
 
 Parse.Cloud.define("verifySubscriber", async (request) => {
     const subscriberId = request.params.subscriberId;
-    const otp = request.params.otp;
+    const otpProvided = request.params.otp;
     console.log(subscriberId);
-    console.log(otp);
+    console.log(otpProvided);
 
     let results;
     try{
@@ -24,11 +24,14 @@ Parse.Cloud.define("verifySubscriber", async (request) => {
         var query = new Parse.Query(Subscribers);
         results = await query.get(subscriberId);
         
-        console.log("actual otp is : " + results.get("oneTimePin"));
-        results = "Hello World";
+        var otp = results.get("oneTimePin");
+        if (otp === otpProvided) {
+            results = "Subscription verified!!";
+        } else {
+            results = "Invalid OTP provided!!";
+        }
         console.log(results);
         return results;
-
     } catch(error){
         return error;
     }
