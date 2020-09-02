@@ -1,13 +1,13 @@
-.form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
-}
 
 .full-width {
     width: 100%;
 }
 
-.mat-card {
-    width: 75%;
+.content { 
+    justify-content: center;
+    padding: 16px; 
+}
+
+.content > mat-card { 
+    width: 200px; 
 }
