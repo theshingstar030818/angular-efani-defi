@@ -20,7 +20,6 @@ export class DialogComponent implements OnInit {
     private appService: AppService,
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-      console.log(data);
       this.subscriber = data;
     }
 
@@ -36,7 +35,6 @@ export class DialogComponent implements OnInit {
         this.dialogRef.close('Subscription verified');
       } else {
         this.errorMessage = result;
-        console.log(result);
         this.oneTimePin.setErrors({incorrect: true});
       }
     });

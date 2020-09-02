@@ -20,7 +20,6 @@ export class AppService {
   private ethGasUrl = 'https://data-api.defipulse.com/api/v1/egs/api/ethgasAPI.json';
 
   constructor(private client: HttpClient) {
-    console.log(this.apiKey);
 
   }
 
@@ -33,8 +32,6 @@ export class AppService {
   }
 
   public verifySubscriber(subscriber, oneTimePin) {
-    console.log(subscriber);
-    console.log(oneTimePin);
     return Parse.Cloud.run('verifySubscriber', { subscriberId: subscriber.id, otp: oneTimePin });
   }
 

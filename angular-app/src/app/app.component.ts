@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
@@ -21,13 +22,9 @@ export class AppComponent {
     gasPrice: new FormControl(70, [Validators.required]),
   });
 
-  constructor(private appService: AppService, public dialog: MatDialog) {
+  constructor(private appService: AppService, public dialog: MatDialog, private snackBar: MatSnackBar) {
     appService.getGas().subscribe((data) => {
-      console.log(data);
       this.gas = data;
-    });
-    appService.getSubscribers().then((subscribers) => {
-      console.log(subscribers);
     });
   }
 
@@ -62,9 +59,11 @@ export class AppComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result);
-      // this.animal = result;
+      if (result) {
+        this.snackBar.open(result, 'Close', {
+          duration: 0,
+        });
+      }
     });
   }
 

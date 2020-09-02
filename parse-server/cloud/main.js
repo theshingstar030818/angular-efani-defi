@@ -15,8 +15,6 @@ function getRandomInt() {
 Parse.Cloud.define("verifySubscriber", async (request) => {
     const subscriberId = request.params.subscriberId;
     const otpProvided = request.params.otp;
-    console.log(subscriberId);
-    console.log(otpProvided);
 
     let results;
     try{
@@ -32,17 +30,14 @@ Parse.Cloud.define("verifySubscriber", async (request) => {
         } else {
             results = "Invalid OTP provided.";
         }
-        console.log(results);
         return results;
     } catch(error){
-        console.log(error);
         return error;
     }
 });
 
 Parse.Cloud.define("saveSubscriber", async (request) => {
     const subscriberFormValue = request.params.subscriberFormValue;
-    console.log(subscriberFormValue);
 
     const Subscriber = Parse.Object.extend('Subscribers');
     const subscriber = new Subscriber();
@@ -53,7 +48,6 @@ Parse.Cloud.define("saveSubscriber", async (request) => {
     let results;
     try{
         results = await subscriber.save(null, { context: { sendOnTimePin: true } });
-        console.log(results);
         return results;
     } catch(error){
         return error.message;
@@ -64,18 +58,11 @@ Parse.Cloud.afterSave("Subscribers", async (req) => {
     var sendOnTimePin = req.context.sendOnTimePin;
 
     if (sendOnTimePin) {
-        var subscriberObject = req.context.subscriberObject;
-        console.log(subscriberObject);
-        console.log(req.object);
-
-        console.log(req.object.id);
-        console.log(req.object.get("phoneNumber"));
-
         const oneTimePin = getRandomInt();
         req.object.set("oneTimePin", oneTimePin);
         req.object.set("verified", false);
         await req.object.save(null, { context: { sendOnTimePin: false } });
-
+        // TODO uncomment when ready
         // await sendSMS(req.object.get("phoneNumber"), "Your One Time Pin (OTP) is : " + oneTimePin);
     }
 });
@@ -99,7 +86,6 @@ Parse.Cloud.define("getSubscriberCount", async request=> {
     let results;
     try{
         results = await query.count({ useMasterKey: true });
-        console.log(results);
         return results;
     } catch(error){
         return error.message;
