@@ -26,9 +26,9 @@ Parse.Cloud.define("verifySubscriber", async (request) => {
         
         var otp = results.get("oneTimePin");
         if (otp === otpProvided) {
-            results = "Subscription verified!!";
+            results = "Subscription verified.";
         } else {
-            results = "Invalid OTP provided!!";
+            throw Error("Invalid OTP provided.");
         }
         console.log(results);
         return results;
