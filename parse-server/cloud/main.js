@@ -15,22 +15,40 @@ function getRandomInt() {
 Parse.Cloud.define("saveSubscriber", function(request, response) {
     const subscriber = request.params.subscriber;
     console.log(subscriber);
+
+    const Subscriber = Parse.Object.extend('Subscribers');
+    const subscriber = new Subscriber();
+    subscriber.set('phoneNumber', subscriber.phoneNumber);
+    subscriber.set('speed', subscriber.speed);
+    subscriber.set('gasPrice', subscriber.gasPrice);
+
+    let results;
+    try{
+        results = await subscriber.save(null, { context: { sendOnTimePin: true } });
+        console.log(results);
+        return results;
+    } catch(error){
+        return error.message;
+    }
 });
 
 Parse.Cloud.afterSave("Subscribers", async (req) => {
-    
-    var subscriberObject = req.context.subscriberObject;
-    console.log(subscriberObject);
-    console.log(req.object);
-
-    console.log(req.object.id);
-    console.log(req.object.get('phoneNumber'));
-
-    const oneTimePin = this.getRandomInt();
-    req.object.set('oneTimePin', oneTimePin);
+    var sendOnTimePin = req.context.sendOnTimePin;
 
     if (sendOnTimePin) {
+        var subscriberObject = req.context.subscriberObject;
+        console.log(subscriberObject);
+        console.log(req.object);
 
+        console.log(req.object.id);
+        console.log(req.object.get("phoneNumber"));
+
+        const oneTimePin = this.getRandomInt();
+        req.object.set("oneTimePin", oneTimePin);
+        req.object.set("verified", false);
+        await subscriber.save(null, { context: { sendOnTimePin: false } });
+
+        // sendSMS(req.object.get("phoneNumber"), "Your One Time Pin (OTP) is : " + oneTimePin);
     }
 });
 
