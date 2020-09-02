@@ -10,7 +10,12 @@ function getRandomInt() {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min) + min);
-  }
+}
+
+Parse.Cloud.define("saveSubscriber", function(request, response) {
+    const subscriber = request.params.subscriber;
+    console.log(subscriber);
+});
 
 Parse.Cloud.afterSave("Subscribers", async (req) => {
     
@@ -21,14 +26,8 @@ Parse.Cloud.afterSave("Subscribers", async (req) => {
     console.log(req.object.id);
     console.log(req.object.get('phoneNumber'));
 
-    var Subscribers = Parse.Object.extend("Subscribers");
-    var query = new Parse.Query(Subscribers);
-    query.get("xWMyZ4YEGZ")
-    .then((subscriber) => {
-        console.log(subscriber);
-    }, (error) => {
-        console.log(error);
-    });
+    const oneTimePin = this.getRandomInt();
+    req.object.set('oneTimePin', oneTimePin);
 
     if (sendOnTimePin) {
 
