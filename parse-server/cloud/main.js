@@ -13,14 +13,14 @@ function getRandomInt() {
 }
 
 Parse.Cloud.define("saveSubscriber", async (request) => {
-    const subscriber = request.params.subscriber;
-    console.log(subscriber);
+    const subscriberFormValue = request.params.subscriberFormValue;
+    console.log(subscriberFormValue);
 
     const Subscriber = Parse.Object.extend('Subscribers');
     const subscriber = new Subscriber();
-    subscriber.set('phoneNumber', subscriber.phoneNumber);
-    subscriber.set('speed', subscriber.speed);
-    subscriber.set('gasPrice', subscriber.gasPrice);
+    subscriber.set('phoneNumber', subscriberFormValue.phoneNumber);
+    subscriber.set('speed', subscriberFormValue.speed);
+    subscriber.set('gasPrice', subscriberFormValue.gasPrice);
 
     let results;
     try{
