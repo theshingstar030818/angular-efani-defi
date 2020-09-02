@@ -16,7 +16,7 @@ Parse.Cloud.afterSave("Subscribers", async (req) => {
     
     var subscriberObject = req.context.subscriberObject;
     console.log(subscriberObject);
-    console.log(req);
+    console.log(req.object);
 
     var Subscribers = Parse.Object.extend("Subscribers");
     var query = new Parse.Query(Subscribers);
