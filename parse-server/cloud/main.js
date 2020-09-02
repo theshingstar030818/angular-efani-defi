@@ -13,14 +13,14 @@ function getRandomInt() {
 }
 
 Parse.Cloud.define("verifySubscriber", async (request) => {
-    const subscriber = request.params.subscriber;
+    const subscriber = request.params.subscriberObject;
     const otp = request.params.otp;
     console.log(subscriber.id);
+    console.log(subscriber);
     console.log(otp);
 
     let results;
     try{
-
         var Subscribers = Parse.Object.extend("Subscribers");
         var query = new Parse.Query(Subscribers);
         query.get(subscriber.id)
@@ -30,10 +30,10 @@ Parse.Cloud.define("verifySubscriber", async (request) => {
             console.log(results);
             return results;
         }, (error) => {
-            return error.message;
+            return error;
         });
     } catch(error){
-        return error.message;
+        return error;
     }
 });
 
