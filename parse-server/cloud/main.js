@@ -10,7 +10,7 @@ Parse.Cloud.afterSave("Subscribers", async (req) => {
     console.log(sendOnTimePin);
     console.log(otp);
 
-    console.log(req.params);
+    console.log(req);
     
     if (sendOnTimePin) {
 
