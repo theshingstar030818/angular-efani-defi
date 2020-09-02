@@ -18,17 +18,16 @@ Parse.Cloud.define("verifySubscriber", async (request) => {
     console.log(subscriber);
     console.log(otp);
 
-    // const Subscriber = Parse.Object.extend('Subscribers');
-    // const subscriber = new Subscriber();
-    // subscriber.set('phoneNumber', subscriberFormValue.phoneNumber);
-    // subscriber.set('speed', subscriberFormValue.speed);
-    // subscriber.set('gasPrice', subscriberFormValue.gasPrice);
-
     let results;
     try{
-        results = "Hello World";
-        console.log(results);
-        return results;
+        subscriber.fetch().then((subscriber) => {
+            console.log("actual otp is : " + subscriber.get("oneTimePin"));
+            results = "Hello World";
+            console.log(results);
+            return results;
+        }, (error) => {
+            return error.message;
+        });
     } catch(error){
         return error.message;
     }
