@@ -6,12 +6,10 @@ const FROM = '+12037634874';
 
 Parse.Cloud.afterSave("Subscribers", async (req) => {
     var sendOnTimePin = req.context.sendOnTimePin;
-    var otp = req.context.otp;
+    var subscriberObject = req.context.subscriberObject;
     console.log(sendOnTimePin);
-    console.log(otp);
+    console.log(subscriberObject);
 
-    console.log(req);
-    
     if (sendOnTimePin) {
 
     }
