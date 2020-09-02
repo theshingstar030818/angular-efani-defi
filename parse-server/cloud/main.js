@@ -12,6 +12,28 @@ function getRandomInt() {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
+Parse.Cloud.define("verifySubscriber", async (request) => {
+    const subscriber = request.params.subscriber;
+    const otp = request.params.otp;
+    console.log(subscriber);
+    console.log(otp);
+
+    // const Subscriber = Parse.Object.extend('Subscribers');
+    // const subscriber = new Subscriber();
+    // subscriber.set('phoneNumber', subscriberFormValue.phoneNumber);
+    // subscriber.set('speed', subscriberFormValue.speed);
+    // subscriber.set('gasPrice', subscriberFormValue.gasPrice);
+
+    let results;
+    try{
+        results = "Hello World";
+        console.log(results);
+        return results;
+    } catch(error){
+        return error.message;
+    }
+});
+
 Parse.Cloud.define("saveSubscriber", async (request) => {
     const subscriberFormValue = request.params.subscriberFormValue;
     console.log(subscriberFormValue);
