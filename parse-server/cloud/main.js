@@ -6,14 +6,22 @@ const twilio = require('twilio')(accountSid, authToken);
 // Create the Cloud Function
 Parse.Cloud.define("inviteWithTwilio", function(request, response) {
     // Use the Twilio Cloud Module to send an SMS
-    twilio.sendSMS({
-        From: "myTwilioPhoneNumber",
-        To: request.params.number,
-        Body: "Start using Parse and Twilio!"
-    }, {
-        success: function(httpResponse) { response.success("SMS sent!"); },
-        error: function(httpResponse) { response.error("Uh oh, something went wrong"); }
-    });
+    twilio.messages
+    .create({
+       body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
+       from: '+12037634874',
+       to: request.params.number
+     })
+    .then(message => console.log(message.sid));
+    
+    // .sendSMS({
+    //     From: "+12037634874",
+    //     To: request.params.number,
+    //     Body: "Start using Parse and Twilio!"
+    // }, {
+    //     success: function(httpResponse) { response.success("SMS sent!"); },
+    //     error: function(httpResponse) { response.error("Uh oh, something went wrong"); }
+    // });
 });
 
 Parse.Cloud.define("getSubscriberCount", async request=> {
