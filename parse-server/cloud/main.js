@@ -28,11 +28,12 @@ Parse.Cloud.define("verifySubscriber", async (request) => {
         if (otp === otpProvided) {
             results = "Subscription verified.";
         } else {
-            throw Error("Invalid OTP provided.");
+            throw "Invalid OTP provided.";
         }
         console.log(results);
         return results;
     } catch(error){
+        console.log(error);
         return error;
     }
 });
