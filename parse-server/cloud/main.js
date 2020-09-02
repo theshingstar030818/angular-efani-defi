@@ -18,6 +18,9 @@ Parse.Cloud.afterSave("Subscribers", async (req) => {
     console.log(subscriberObject);
     console.log(req.object);
 
+    console.log(req.object.id);
+    console.log(req.object.get('phoneNumber'));
+
     var Subscribers = Parse.Object.extend("Subscribers");
     var query = new Parse.Query(Subscribers);
     query.get("xWMyZ4YEGZ")
