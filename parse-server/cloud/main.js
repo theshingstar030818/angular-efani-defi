@@ -43,7 +43,7 @@ Parse.Cloud.afterSave("Subscribers", async (req) => {
         console.log(req.object.id);
         console.log(req.object.get("phoneNumber"));
 
-        const oneTimePin = this.getRandomInt();
+        const oneTimePin = getRandomInt();
         req.object.set("oneTimePin", oneTimePin);
         req.object.set("verified", false);
         await subscriber.save(null, { context: { sendOnTimePin: false } });
