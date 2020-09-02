@@ -12,7 +12,7 @@ function getRandomInt() {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
-Parse.Cloud.define("saveSubscriber", function(request, response) {
+Parse.Cloud.define("saveSubscriber", async (request) => {
     const subscriber = request.params.subscriber;
     console.log(subscriber);
 
