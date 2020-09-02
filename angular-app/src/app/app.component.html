@@ -49,7 +49,7 @@
                         <mat-label>Enter Phone Number (Get notified when gas is at/below {{subscriberForm.value.gasPrice}} gwei)</mat-label>
                         <input matInput type="tel" formControlName="phoneNumber">
                     </mat-form-field>
-                    <button mat-raised-button type="submit" [disabled]="!subscriberForm.valid">Subscribe</button>
+                    <button mat-raised-button color="primary" type="submit" [disabled]="!subscriberForm.valid">Subscribe</button>
                 </form>
             </mat-card>
         </mat-grid-tile>

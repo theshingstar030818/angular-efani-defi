@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Verify your number: {{subscriber.get('phoneNumber')}}</h1>
+<div mat-dialog-content>
+    <p>What's the OTP code sent to you ?</p>
+    <mat-form-field>
+        <mat-label>OTP Code</mat-label>
+        <input matInput type="number" [formControl]="oneTimePin">
+        <mat-error *ngIf="!!errorMessage || !oneTimePin.valid">{{errorMessage}}</mat-error>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <div *ngIf="showSpinner; else elseBlock"><mat-spinner></mat-spinner></div>
+    
+    <ng-template #elseBlock>
+        <button mat-raised-button color="warn" (click)="onNoClick()">No Thanks</button>
+        <button mat-raised-button color="primary" [disabled]="!oneTimePin.valid" (click)="onVerify()" cdkFocusInitial>Verify</button>
+    </ng-template>
+</div>

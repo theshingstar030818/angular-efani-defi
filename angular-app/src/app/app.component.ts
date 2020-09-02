@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { AppService } from './app.service';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from './dialog/dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +21,7 @@ export class AppComponent {
     gasPrice: new FormControl(70, [Validators.required]),
   });
 
-  constructor(private appService: AppService) {
+  constructor(private appService: AppService, public dialog: MatDialog) {
     appService.getGas().subscribe((data) => {
       console.log(data);
       this.gas = data;
@@ -30,14 +32,10 @@ export class AppComponent {
   }
 
   public saveSubscriber() {
-    console.log(this.subscriberForm.value);
     const formValue = this.subscriberForm.value;
-    this.appService.subscribe(formValue.phoneNumber, formValue.speed, formValue.gasPrice).then((savedSubscriber) => {
-      // Execute any logic that should take place after the object is saved.
-      console.log('New object created with objectId: ', savedSubscriber);
+    this.appService.subscribe(formValue).then((savedSubscriber) => {
+      this.openDialog(savedSubscriber);
     }, (error) => {
-      // Execute any logic that should take place if the save fails.
-      // error is a Parse.Error with an error code and message.
       console.error('Failed to create new object, with error code: ' + error.message);
     });
   }
@@ -56,5 +54,18 @@ export class AppComponent {
   }
 
   public keepOriginalOrder = (a, b) => a.key;
+
+  public openDialog(subscriberData): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '250px',
+      data: subscriberData
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+      // this.animal = result;
+    });
+  }
 
 }

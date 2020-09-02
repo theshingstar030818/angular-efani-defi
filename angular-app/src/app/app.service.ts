@@ -24,15 +24,22 @@ export class AppService {
 
   }
 
-  public subscribe(phoneNumber: number, speed: string, gasPrice: number) {
-    const Subscriber = Parse.Object.extend('Subscribers');
-    const subscriber = new Subscriber();
+  private getRandomInt() {
+    let min = 1111;
+    let max = 9999;
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min);
+  }
 
-    subscriber.set('phoneNumber', phoneNumber);
-    subscriber.set('speed', speed);
-    subscriber.set('gasPrice', gasPrice);
+  public verifySubscriber(subscriber, oneTimePin) {
+    console.log(subscriber);
+    console.log(oneTimePin);
+    return Parse.Cloud.run('verifySubscriber', { subscriberId: subscriber.id, otp: oneTimePin });
+  }
 
-    return subscriber.save();
+  public subscribe(formValue: any) {
+    return Parse.Cloud.run('saveSubscriber', { subscriberFormValue: formValue });
   }
 
   public getSubscribers(): Promise <any> {
