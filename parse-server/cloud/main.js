@@ -22,13 +22,15 @@ Parse.Cloud.define("verifySubscriber", async (request) => {
     try{
         var Subscribers = Parse.Object.extend("Subscribers");
         var query = new Parse.Query(Subscribers);
-        results = await query.get(subscriberId);
+        subscriber = await query.get(subscriberId);
         
-        var otp = results.get("oneTimePin");
+        var otp = subscriber.get("oneTimePin");
         if (otp === otpProvided) {
-            results = "Subscription verified.";
+            subscriber.set("verified", true);
+            subscriber.save();
+            results = 200;
         } else {
-            throw "Invalid OTP provided.";
+            results = "Invalid OTP provided.";
         }
         console.log(results);
         return results;
