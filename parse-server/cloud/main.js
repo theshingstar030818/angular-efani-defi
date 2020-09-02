@@ -76,12 +76,12 @@ Parse.Cloud.afterSave("Subscribers", async (req) => {
         req.object.set("verified", false);
         await req.object.save(null, { context: { sendOnTimePin: false } });
 
-        // sendSMS(req.object.get("phoneNumber"), "Your One Time Pin (OTP) is : " + oneTimePin);
+        await sendSMS(req.object.get("phoneNumber"), "Your One Time Pin (OTP) is : " + oneTimePin);
     }
 });
 
 function sendSMS(phoneNumber, message) {
-    twilio.messages
+    return twilio.messages
     .create({
         body: message,
         from: FROM,
