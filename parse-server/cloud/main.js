@@ -4,11 +4,28 @@ const twilio = require('twilio')(accountSid, authToken);
 
 const FROM = '+12037634874';
 
+function getRandomInt() {
+    var min = 1111;
+    var max = 9999;
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min);
+  }
+
 Parse.Cloud.afterSave("Subscribers", async (req) => {
-    var sendOnTimePin = req.context.sendOnTimePin;
+    
     var subscriberObject = req.context.subscriberObject;
-    console.log(sendOnTimePin);
     console.log(subscriberObject);
+    console.log(req);
+
+    var Subscribers = Parse.Object.extend("Subscribers");
+    var query = new Parse.Query(Subscribers);
+    query.get("xWMyZ4YEGZ")
+    .then((subscriber) => {
+        console.log(subscriber);
+    }, (error) => {
+        console.log(error);
+    });
 
     if (sendOnTimePin) {
 
