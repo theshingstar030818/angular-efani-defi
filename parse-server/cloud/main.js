@@ -76,7 +76,7 @@ Parse.Cloud.afterSave("Subscribers", async (req) => {
         req.object.set("verified", false);
         await req.object.save(null, { context: { sendOnTimePin: false } });
 
-        await sendSMS(req.object.get("phoneNumber"), "Your One Time Pin (OTP) is : " + oneTimePin);
+        // await sendSMS(req.object.get("phoneNumber"), "Your One Time Pin (OTP) is : " + oneTimePin);
     }
 });
 
