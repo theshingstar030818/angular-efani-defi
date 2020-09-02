@@ -1,6 +1,7 @@
 // Include the Twilio Cloud Module and initialize it
-var twilio = require("twilio");
-twilio.initialize("AC6d140e5ebe108ae77b04f2dcb4258246", "4b390328818292afccb265aa724825eb");
+const accountSid = 'AC6d140e5ebe108ae77b04f2dcb4258246';
+const authToken = '4b390328818292afccb265aa724825eb';
+const twilio = require('twilio')(accountSid, authToken);
 
 // Create the Cloud Function
 Parse.Cloud.define("inviteWithTwilio", function(request, response) {
