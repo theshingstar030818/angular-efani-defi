@@ -1,1 +1,1 @@
-{"options":{},"indexes":[{"v":{"$numberInt":"1"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"dev.Subscribers"}],"uuid":""}
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"1c1f6b43b9544912a244dcb85edeb9dc","collectionName":"Subscribers"}
